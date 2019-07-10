@@ -12,7 +12,6 @@ namespace rafaeldsb\rabbitmqlog;
 use PhpAmqpLib\Channel\AMQPChannel;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 use PhpAmqpLib\Message\AMQPMessage;
-use yii\base\ActionEvent;
 use yii\base\Application;
 use yii\base\Component;
 use yii\base\Controller;
@@ -20,8 +19,6 @@ use yii\base\Event;
 use yii\base\InvalidArgumentException;
 
 use yii\db\ActiveRecord;
-use yii\db\AfterSaveEvent;
-use yii\helpers\VarDumper;
 
 class RabbitMQ extends Component
 {
@@ -44,6 +41,8 @@ class RabbitMQ extends Component
 
     public $defaultRoutingKey = 'ApplicationLog';
 
+    public $logClass = 'rafaeldsb\\rabbitmqlog\\Log';
+
     /** @var AMQPStreamConnection */
     protected $connection;
 
@@ -57,17 +56,8 @@ class RabbitMQ extends Component
 
     public function init()
     {
-        $this->log = new Log();
+        $this->log = new $this->logClass();
         $this->manageEvents();
-/*
-        \Yii::$app->on(Application::EVENT_AFTER_REQUEST, function($event) {
-           //die();
-        });
-
-        Event::on(, ActiveRecord::EVENT_AFTER_DELETE, function (AfterSaveEvent $event) {
-            VarDumper::dump($event,10,true);
-            die();
-        });*/
     }
 
     protected function manageEvents() {
