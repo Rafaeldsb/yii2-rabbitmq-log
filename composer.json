@@ -1,0 +1,22 @@
+{
+    "name": "rafaeldsb/yii2-rabbitmq-log",
+    "description": "Geração de logs estruturados e envio para o rabbitmq",
+    "type": "yii2-extension",
+    "authors": [
+        {
+            "name": "Rafael Bernardo",
+            "email": "rafael.dsbernardo@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "rafaeldsb\\rabbitmqlog\\": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "require": {
+        "yiisoft/yii2": "^2.0",
+        "php-amqplib/php-amqplib": "^2.9",
+        "ext-json": "*"
+    }
+}
