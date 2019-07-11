@@ -61,8 +61,8 @@ class RabbitMQ extends Component
     }
 
     protected function manageEvents() {
-        Event::on(self::ILoggingClass, ActiveRecord::EVENT_BEFORE_INSERT, [$this->log, 'afterUpdate']);
-        Event::on(self::ILoggingClass, ActiveRecord::EVENT_BEFORE_UPDATE, [$this->log, 'afterSave']);
+        Event::on(self::ILoggingClass, ActiveRecord::EVENT_BEFORE_INSERT, [$this->log, 'beforeUpdate']);
+        Event::on(self::ILoggingClass, ActiveRecord::EVENT_BEFORE_UPDATE, [$this->log, 'beforeSave']);
         Event::on(self::ILoggingClass, ActiveRecord::EVENT_AFTER_UPDATE, [$this->log, 'afterUpdate']);
         Event::on(self::ILoggingClass, ActiveRecord::EVENT_AFTER_INSERT, [$this->log, 'afterSave']);
         Event::on(Controller::className(), Controller::EVENT_BEFORE_ACTION, [$this->log, 'beforeAction']);
