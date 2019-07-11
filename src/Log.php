@@ -85,7 +85,8 @@ class Log extends BaseObject implements ILog
         $request = \Yii::$app->request;
         $user = \Yii::$app->user->identity;
 
-        $this->user = $user->getId();
+        if($user)
+            $this->user = $user->getId();
         $this->request = $request;
         $this->header = $request->headers;
 
