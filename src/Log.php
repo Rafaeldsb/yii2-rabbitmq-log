@@ -109,7 +109,7 @@ class Log extends BaseObject implements ILog
 
     }
 
-    public function afterSend($event) {
+    public function beforeSend($event) {
 
     }
 

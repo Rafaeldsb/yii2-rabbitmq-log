@@ -68,8 +68,8 @@ class RabbitMQ extends Component
         Event::on(self::I_LOGGING_CLASS, ActiveRecord::EVENT_AFTER_INSERT, [$this->log, 'afterSave']);
         Event::on(Controller::className(), Controller::EVENT_BEFORE_ACTION, [$this->log, 'beforeAction']);
         Event::on(Controller::className(), Controller::EVENT_AFTER_ACTION, [$this->log, 'afterAction']);
-        Event::on(Response::className(), Response::EVENT_AFTER_SEND, [$this->log, 'afterSend']);
-        Event::on(Response::className(), Response::EVENT_AFTER_SEND, [$this, 'sendLog']);
+        Event::on(Response::className(), Response::EVENT_BEFORE_SEND, [$this->log, 'beforeSend']);
+        Event::on(Response::className(), Response::EVENT_BEFORE_SEND, [$this, 'sendLog']);
     }
 
     protected function connect() {
