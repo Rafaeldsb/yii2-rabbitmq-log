@@ -23,7 +23,7 @@ use yii\web\Response;
 
 class RabbitMQ extends Component
 {
-    const ILoggingClass = 'common\components\rabbitmq\ILogging';
+    const I_LOGGING_CLASS = 'common\components\rabbitmq\ILogging';
 
     public $host;
     public $port;
@@ -62,10 +62,10 @@ class RabbitMQ extends Component
     }
 
     protected function manageEvents() {
-        Event::on(self::ILoggingClass, ActiveRecord::EVENT_BEFORE_INSERT, [$this->log, 'beforeUpdate']);
-        Event::on(self::ILoggingClass, ActiveRecord::EVENT_BEFORE_UPDATE, [$this->log, 'beforeSave']);
-        Event::on(self::ILoggingClass, ActiveRecord::EVENT_AFTER_UPDATE, [$this->log, 'afterUpdate']);
-        Event::on(self::ILoggingClass, ActiveRecord::EVENT_AFTER_INSERT, [$this->log, 'afterSave']);
+        Event::on(self::I_LOGGING_CLASS, ActiveRecord::EVENT_BEFORE_INSERT, [$this->log, 'beforeUpdate']);
+        Event::on(self::I_LOGGING_CLASS, ActiveRecord::EVENT_BEFORE_UPDATE, [$this->log, 'beforeSave']);
+        Event::on(self::I_LOGGING_CLASS, ActiveRecord::EVENT_AFTER_UPDATE, [$this->log, 'afterUpdate']);
+        Event::on(self::I_LOGGING_CLASS, ActiveRecord::EVENT_AFTER_INSERT, [$this->log, 'afterSave']);
         Event::on(Controller::className(), Controller::EVENT_BEFORE_ACTION, [$this->log, 'beforeAction']);
         Event::on(Controller::className(), Controller::EVENT_AFTER_ACTION, [$this->log, 'afterAction']);
         Event::on(Response::className(), Response::EVENT_AFTER_SEND, [$this->log, 'afterSend']);
