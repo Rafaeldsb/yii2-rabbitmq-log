@@ -19,6 +19,7 @@ use yii\base\Event;
 use yii\base\InvalidArgumentException;
 
 use yii\db\ActiveRecord;
+use yii\web\Response;
 
 class RabbitMQ extends Component
 {
@@ -67,8 +68,8 @@ class RabbitMQ extends Component
         Event::on(self::ILoggingClass, ActiveRecord::EVENT_AFTER_INSERT, [$this->log, 'afterSave']);
         Event::on(Controller::className(), Controller::EVENT_BEFORE_ACTION, [$this->log, 'beforeAction']);
         Event::on(Controller::className(), Controller::EVENT_AFTER_ACTION, [$this->log, 'afterAction']);
-        \Yii::$app->on(Application::EVENT_AFTER_REQUEST, [$this->log, 'afterRequest']);
-        \Yii::$app->on(Application::EVENT_AFTER_REQUEST, [$this, 'sendLog']);
+        Event::on(Response::className(), Response::EVENT_AFTER_SEND, [$this->log, 'afterSend']);
+        Event::on(Response::className(), Response::EVENT_AFTER_SEND, [$this, 'sendLog']);
     }
 
     protected function connect() {
