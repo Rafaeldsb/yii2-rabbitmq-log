@@ -21,5 +21,5 @@ interface ILog
     function afterSave(AfterSaveEvent $event);
     function beforeAction(ActionEvent $event);
     function afterAction(ActionEvent $event);
-    function afterRequest($event);
+    function afterSend($event);
 }
